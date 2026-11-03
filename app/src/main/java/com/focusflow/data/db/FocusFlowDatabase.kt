@@ -20,9 +20,10 @@ import com.focusflow.data.db.entity.*
         Commitment::class,
         Todo::class,
         CoinTransaction::class,
-        UnlockIntervention::class
+        UnlockIntervention::class,
+        Note::class
     ],
-    version = 8,
+    version = 11,
     exportSchema = false
 )
 abstract class FocusFlowDatabase : RoomDatabase() {
@@ -36,6 +37,7 @@ abstract class FocusFlowDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
     abstract fun coinDao(): CoinDao
     abstract fun interventionDao(): InterventionDao
+    abstract fun noteDao(): NoteDao
 
     companion object {
         @Volatile
@@ -56,6 +58,35 @@ abstract class FocusFlowDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_8_9 = object : androidx.room.migration.Migration(8, 9) {
+            override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS notes (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        title TEXT NOT NULL,
+                        content TEXT NOT NULL,
+                        emoji TEXT NOT NULL,
+                        category TEXT NOT NULL,
+                        colorTag TEXT NOT NULL,
+                        date TEXT NOT NULL,
+                        createdAt INTEGER NOT NULL
+                    )
+                """.trimIndent())
+            }
+        }
+
+        private val MIGRATION_9_10 = object : androidx.room.migration.Migration(9, 10) {
+            override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE todos ADD COLUMN dueDate TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
+        private val MIGRATION_10_11 = object : androidx.room.migration.Migration(10, 11) {
+            override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE notes ADD COLUMN audioPath TEXT DEFAULT NULL")
+            }
+        }
+
         fun getDatabase(context: Context): FocusFlowDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -63,7 +94,7 @@ abstract class FocusFlowDatabase : RoomDatabase() {
                     FocusFlowDatabase::class.java,
                     "focusflow_database"
                 )
-                    .addMigrations(MIGRATION_6_7, MIGRATION_7_8)
+                    .addMigrations(MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

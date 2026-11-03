@@ -12,6 +12,9 @@ interface TodoDao {
     @Query("SELECT * FROM todos WHERE isCompleted = 0 ORDER BY createdAt DESC")
     fun getPendingTodos(): Flow<List<Todo>>
 
+    @Query("SELECT * FROM todos WHERE id = :id LIMIT 1")
+    suspend fun getTodoById(id: Long): Todo?
+
     @Query("SELECT COUNT(*) FROM todos WHERE isCompleted = 1")
     fun getCompletedTodosCount(): Flow<Int>
 

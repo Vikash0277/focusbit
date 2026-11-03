@@ -6,86 +6,101 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 
 // ==========================================
-// Dark Palette Tokens
+// M3 EXPRESSIVE – DARK PALETTE
+// Warm, inviting tones with deeper saturation
 // ==========================================
-val DarkPrimary = Color(0xFFC0C1FF)
-val DarkOnPrimary = Color(0xFF1000A9)
-val DarkPrimaryContainer = Color(0xFF8083FF)
-val DarkOnPrimaryContainer = Color(0xFF0D0096)
-val DarkInversePrimary = Color(0xFF494BD6)
+val DarkPrimary = Color(0xFFB49AFF)         // Brighter, warmer violet
+val DarkOnPrimary = Color(0xFF2D0F6A)
+val DarkPrimaryContainer = Color(0xFF4A21A0)
+val DarkOnPrimaryContainer = Color(0xFFEADDFF)
+val DarkInversePrimary = Color(0xFF7C3AED)
 
-val DarkSecondary = Color(0xFF7BD0FF)
-val DarkOnSecondary = Color(0xFF00354A)
-val DarkSecondaryContainer = Color(0xFF00A6E0)
-val DarkOnSecondaryContainer = Color(0xFF00374D)
+val DarkSecondary = Color(0xFFFDD068)       // Richer golden yellow
+val DarkOnSecondary = Color(0xFF3D2600)
+val DarkSecondaryContainer = Color(0xFF5A3900)
+val DarkOnSecondaryContainer = Color(0xFFFFE4A8)
 
-val DarkTertiary = Color(0xFF4EDEA3)
-val DarkOnTertiary = Color(0xFF003824)
-val DarkTertiaryContainer = Color(0xFF00885D)
-val DarkOnTertiaryContainer = Color(0xFF000703)
+val DarkTertiary = Color(0xFFF9A8D4)        // Warmer pink/rose
+val DarkOnTertiary = Color(0xFF4A0E2F)
+val DarkTertiaryContainer = Color(0xFF6E1A47)
+val DarkOnTertiaryContainer = Color(0xFFFFD9EC)
 
 val DarkError = Color(0xFFFFB4AB)
 val DarkOnError = Color(0xFF690005)
 val DarkErrorContainer = Color(0xFF93000A)
 val DarkOnErrorContainer = Color(0xFFFFDAD6)
 
-val DarkSurface = Color(0xFF0B1326)
-val DarkOnSurface = Color(0xFFDAE2FD)
-val DarkSurfaceVariant = Color(0xFF2D3449)
-val DarkOnSurfaceVariant = Color(0xFFC7C4D7)
-val DarkSurfaceDim = Color(0xFF0B1326)
-val DarkSurfaceBright = Color(0xFF31394D)
-val DarkSurfaceContainer = Color(0xFF171F33)
-val DarkSurfaceContainerLow = Color(0xFF131B2E)
-val DarkSurfaceContainerLowest = Color(0xFF060E20)
-val DarkSurfaceContainerHigh = Color(0xFF222A3D)
-val DarkSurfaceContainerHighest = Color(0xFF2D3449)
+val DarkSurface = Color(0xFF110F1A)         // Slightly warmer dark
+val DarkOnSurface = Color(0xFFF0ECF8)
+val DarkSurfaceVariant = Color(0xFF2C2640)
+val DarkOnSurfaceVariant = Color(0xFFCCC4DC)
+val DarkSurfaceDim = Color(0xFF110F1A)
+val DarkSurfaceBright = Color(0xFF3A3350)
+val DarkSurfaceContainer = Color(0xFF1C1828)
+val DarkSurfaceContainerLow = Color(0xFF171322)
+val DarkSurfaceContainerLowest = Color(0xFF0C0A14)
+val DarkSurfaceContainerHigh = Color(0xFF262038)
+val DarkSurfaceContainerHighest = Color(0xFF312B46)
 
-val DarkOutline = Color(0xFF908FA0)
-val DarkOutlineVariant = Color(0xFF464554)
-val DarkInverseSurface = Color(0xFFDAE2FD)
-val DarkInverseOnSurface = Color(0xFF283044)
+val DarkOutline = Color(0xFF7E748F)
+val DarkOutlineVariant = Color(0xFF423D55)
+val DarkInverseSurface = Color(0xFFE8E0F4)
+val DarkInverseOnSurface = Color(0xFF1E1A2B)
 
 // ==========================================
-// Light Palette Tokens
+// M3 EXPRESSIVE – LIGHT PALETTE
+// Bright, high-contrast expressive pastels
 // ==========================================
-val LightPrimary = Color(0xFF434EE8)
+val LightPrimary = Color(0xFF6D28D9)        // Vivid violet primary
 val LightOnPrimary = Color(0xFFFFFFFF)
-val LightPrimaryContainer = Color(0xFFE0E2FF)
-val LightOnPrimaryContainer = Color(0xFF0B0080)
-val LightInversePrimary = Color(0xFFC0C1FF)
+val LightPrimaryContainer = Color(0xFFF3EAFF)
+val LightOnPrimaryContainer = Color(0xFF3B0F7E)
+val LightInversePrimary = Color(0xFFB49AFF)
 
-val LightSecondary = Color(0xFF006688)
+val LightSecondary = Color(0xFFE8960A)      // Deep warm amber
 val LightOnSecondary = Color(0xFFFFFFFF)
-val LightSecondaryContainer = Color(0xFFC4E7FF)
-val LightOnSecondaryContainer = Color(0xFF001E2B)
+val LightSecondaryContainer = Color(0xFFFFF5E0)
+val LightOnSecondaryContainer = Color(0xFF5A3900)
 
-val LightTertiary = Color(0xFF006C48)
+val LightTertiary = Color(0xFFD6366E)       // Vivid rose-pink
 val LightOnTertiary = Color(0xFFFFFFFF)
-val LightTertiaryContainer = Color(0xFF8EF8C3)
-val LightOnTertiaryContainer = Color(0xFF002113)
+val LightTertiaryContainer = Color(0xFFFFE0EE)
+val LightOnTertiaryContainer = Color(0xFF6E1A47)
 
 val LightError = Color(0xFFBA1A1A)
 val LightOnError = Color(0xFFFFFFFF)
 val LightErrorContainer = Color(0xFFFFDAD6)
 val LightOnErrorContainer = Color(0xFF410002)
 
-val LightSurface = Color(0xFFF7F9FD)
-val LightOnSurface = Color(0xFF181C22)
-val LightSurfaceVariant = Color(0xFFE1E2EC)
-val LightOnSurfaceVariant = Color(0xFF44464F)
-val LightSurfaceDim = Color(0xFFD8DAE0)
-val LightSurfaceBright = Color(0xFFF7F9FD)
-val LightSurfaceContainer = Color(0xFFECEEF4)
-val LightSurfaceContainerLow = Color(0xFFF2F3F9)
+val LightSurface = Color(0xFFFCF8FF)        // Warmest white surface
+val LightOnSurface = Color(0xFF1B1728)
+val LightSurfaceVariant = Color(0xFFF0E8FC)
+val LightOnSurfaceVariant = Color(0xFF534B65)
+val LightSurfaceDim = Color(0xFFE0D6EF)
+val LightSurfaceBright = Color(0xFFFEFBFF)
+val LightSurfaceContainer = Color(0xFFF5EFFE)
+val LightSurfaceContainerLow = Color(0xFFF9F4FF)
 val LightSurfaceContainerLowest = Color(0xFFFFFFFF)
-val LightSurfaceContainerHigh = Color(0xFFE6E8EE)
-val LightSurfaceContainerHighest = Color(0xFFE0E2E8)
+val LightSurfaceContainerHigh = Color(0xFFECE4F6)
+val LightSurfaceContainerHighest = Color(0xFFE4DCEE)
 
-val LightOutline = Color(0xFF74777F)
-val LightOutlineVariant = Color(0xFFC4C6D0)
-val LightInverseSurface = Color(0xFF2D3137)
-val LightInverseOnSurface = Color(0xFFEFF0F7)
+val LightOutline = Color(0xFF847A95)
+val LightOutlineVariant = Color(0xFFD5CBE6)
+val LightInverseSurface = Color(0xFF2E2940)
+val LightInverseOnSurface = Color(0xFFF5F0FF)
+
+// ==========================================
+// M3 Expressive Accent & Gradient Tokens
+// ==========================================
+val VioletCardGradientStart = Color(0xFFA67CFC)
+val VioletCardGradientEnd = Color(0xFF6D28D9)
+val AmberCardGradientStart = Color(0xFFFFCC66)
+val AmberCardGradientEnd = Color(0xFFE8960A)
+val RoseCardGradientStart = Color(0xFFF9A8D4)
+val RoseCardGradientEnd = Color(0xFFD6366E)
+val MintGreen = Color(0xFF10B981)
+val SkyBlue = Color(0xFF0EA5E9)
+val Coral = Color(0xFFF97316)
 
 // ==========================================
 // Composable Theme Properties (Dynamic for Light & Dark)

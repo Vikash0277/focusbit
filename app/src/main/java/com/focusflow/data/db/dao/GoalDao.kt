@@ -29,4 +29,7 @@ interface GoalDao {
 
     @Query("UPDATE goals SET reminderEnabled = :reminderEnabled, reminderTime = :reminderTime WHERE id = :goalId")
     suspend fun updateGoalReminder(goalId: Long, reminderEnabled: Boolean, reminderTime: String)
+
+    @Query("SELECT * FROM goals ORDER BY id DESC")
+    suspend fun getAllGoalsSync(): List<Goal>
 }

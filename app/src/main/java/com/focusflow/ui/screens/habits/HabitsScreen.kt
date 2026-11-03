@@ -99,7 +99,7 @@ fun HabitsScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
-            .padding(bottom = 16.dp),
+            .padding(bottom = 110.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         // Header
@@ -128,7 +128,7 @@ fun HabitsScreen(
         }
 
         // Summary Banner
-        Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainerHigh, shadowElevation = 6.dp) {
+        Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainerHigh, shadowElevation = 6.dp) {
             Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -172,7 +172,7 @@ fun HabitsScreen(
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Habits", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = OnSurface)
             if (uiState.habits.isEmpty()) {
-                Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainer) {
+                Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainer) {
                     Column(
                         modifier = Modifier.fillMaxWidth().padding(24.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -237,7 +237,7 @@ private fun HabitRow(
     val icon = habitIconMap[habit.iconName] ?: Icons.Filled.CheckCircle
 
     Surface(
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(24.dp),
         color = if (isSelected) SurfaceContainerHigh else SurfaceContainer,
         border = if (isSelected) androidx.compose.foundation.BorderStroke(1.5.dp, Tertiary) else null,
         modifier = Modifier.fillMaxWidth().clickable { onToggle() }
@@ -340,7 +340,7 @@ private fun HeatmapSection(
         }
     }
 
-    Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainerHigh, shadowElevation = 4.dp) {
+    Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainerHigh, shadowElevation = 4.dp) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             // Header with Month Number / LeetCode Title and Habit Name
             Row(
@@ -392,7 +392,7 @@ private fun HeatmapSection(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceContainer, RoundedCornerShape(10.dp))
+                    .background(SurfaceContainer, RoundedCornerShape(16.dp))
                     .padding(4.dp),
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
@@ -401,7 +401,7 @@ private fun HeatmapSection(
                     val isProTab = index > 0
                     val locked = isProTab && !isPro
                     Surface(
-                        shape = RoundedCornerShape(8.dp),
+                        shape = RoundedCornerShape(14.dp),
                         color = if (selected) PrimaryContainer else Color.Transparent,
                         modifier = Modifier.weight(1f).clickable { onTabSelect(index) }
                     ) {
@@ -445,7 +445,7 @@ private fun HeatmapSection(
                         val isLocked = !isCur && !isPro
 
                         Surface(
-                            shape = RoundedCornerShape(8.dp),
+                            shape = RoundedCornerShape(14.dp),
                             color = if (isSelectedMonth) TertiaryContainer else SurfaceContainer,
                             modifier = Modifier.clickable { onMonthSelect(m) }
                         ) {
@@ -485,7 +485,7 @@ private fun HeatmapSection(
                                 Text("All Habits", style = MaterialTheme.typography.labelSmall, maxLines = 1)
                             }
                         },
-                        shape = RoundedCornerShape(10.dp),
+                        shape = RoundedCornerShape(16.dp),
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = PrimaryContainer,
                             selectedLabelColor = OnPrimaryContainer
@@ -505,7 +505,7 @@ private fun HeatmapSection(
                                     Text(h.title, style = MaterialTheme.typography.labelSmall, maxLines = 1)
                                 }
                             },
-                            shape = RoundedCornerShape(10.dp),
+                            shape = RoundedCornerShape(16.dp),
                             colors = FilterChipDefaults.filterChipColors(
                                 selectedContainerColor = TertiaryContainer,
                                 selectedLabelColor = OnTertiaryContainer
@@ -519,19 +519,19 @@ private fun HeatmapSection(
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (uiState.selectedHeatmapTab == 2) {
                     // LeetCode Year Stats
-                    Surface(shape = RoundedCornerShape(8.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
+                    Surface(shape = RoundedCornerShape(14.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
                         Column(modifier = Modifier.padding(10.dp)) {
                             Text("ACTIVE DAYS", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant)
                             Text("${uiState.totalYearActiveDays}", style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp), color = Tertiary)
                         }
                     }
-                    Surface(shape = RoundedCornerShape(8.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
+                    Surface(shape = RoundedCornerShape(14.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
                         Column(modifier = Modifier.padding(10.dp)) {
                             Text("TOTAL DONE", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant)
                             Text("${uiState.totalYearCompletions}", style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp), color = Primary)
                         }
                     }
-                    Surface(shape = RoundedCornerShape(8.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
+                    Surface(shape = RoundedCornerShape(14.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
                         Column(modifier = Modifier.padding(10.dp)) {
                             Text("LONGEST", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant)
                             Row(verticalAlignment = Alignment.Bottom) {
@@ -542,7 +542,7 @@ private fun HeatmapSection(
                     }
                 } else {
                     // Month / 90-Day View Stats
-                    Surface(shape = RoundedCornerShape(8.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
+                    Surface(shape = RoundedCornerShape(14.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
                         Column(modifier = Modifier.padding(12.dp)) {
                             Text("CURRENT", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant)
                             Row(verticalAlignment = Alignment.Bottom) {
@@ -552,7 +552,7 @@ private fun HeatmapSection(
                         }
                     }
                     Surface(
-                        shape = RoundedCornerShape(8.dp),
+                        shape = RoundedCornerShape(14.dp),
                         color = SurfaceContainer,
                         modifier = Modifier.weight(1f).clickable(enabled = !isPro) { onTabSelect(1) }
                     ) {
@@ -571,7 +571,7 @@ private fun HeatmapSection(
                             }
                         }
                     }
-                    Surface(shape = RoundedCornerShape(8.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
+                    Surface(shape = RoundedCornerShape(14.dp), color = SurfaceContainer, modifier = Modifier.weight(1f)) {
                         Column(modifier = Modifier.padding(12.dp)) {
                             Text(monthShort.uppercase(), style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant)
                             Row(verticalAlignment = Alignment.Bottom) {
@@ -585,7 +585,7 @@ private fun HeatmapSection(
 
             // === MAIN HEATMAP DISPLAY AREA ===
             if (uiState.selectedHeatmapTab == 2) {
-                Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainerLowest) {
+                Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainerLowest) {
                     Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -612,7 +612,7 @@ private fun HeatmapSection(
                         // Selected day detail pill
                         selectedDayDetail?.let { day ->
                             Surface(
-                                shape = RoundedCornerShape(8.dp),
+                                shape = RoundedCornerShape(14.dp),
                                 color = SurfaceContainer,
                                 modifier = Modifier.fillMaxWidth()
                             ) {
@@ -741,9 +741,9 @@ private fun HeatmapSection(
                         }
                     }
                 }
-            } else {
-                // === CALENDAR HEATMAP (Month View & 3 Months View) ===
-                Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainerLowest) {
+            } else if (uiState.selectedHeatmapTab == 1) {
+                // === 90-DAY HEATMAP (Horizontal GitHub-style) ===
+                Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainerLowest) {
                     Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -751,7 +751,7 @@ private fun HeatmapSection(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = if (uiState.selectedHeatmapTab == 0) "$monthName Consistency" else "90-Day Consistency",
+                                text = "90-Day Consistency",
                                 style = MaterialTheme.typography.labelMedium,
                                 fontWeight = FontWeight.SemiBold,
                                 color = OnSurface
@@ -761,32 +761,163 @@ private fun HeatmapSection(
                             }
                         }
 
-                        // In 90 Days view: Show Month pills
-                        if (uiState.selectedHeatmapTab == 1) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        // Month pills in a row
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            val monthsList = listOf(
+                                past90Start.plusMonths(0),
+                                past90Start.plusMonths(1),
+                                past90Start.plusMonths(2)
+                            )
+                            monthsList.forEach { m ->
+                                Surface(
+                                    shape = RoundedCornerShape(10.dp),
+                                    color = if (m.monthValue == currentMonthNumber) PrimaryContainer.copy(alpha = 0.4f) else SurfaceContainer,
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    Text(
+                                        text = m.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
+                                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+                                        color = if (m.monthValue == currentMonthNumber) Primary else OnSurfaceVariant,
+                                        modifier = Modifier.padding(vertical = 4.dp),
+                                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                                    )
+                                }
+                            }
+                        }
+
+                        // Horizontal scrollable heatmap grid (like annual view)
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            // Day-of-week labels column
+                            Column(
+                                modifier = Modifier.padding(top = 18.dp, end = 6.dp),
+                                verticalArrangement = Arrangement.spacedBy(2.dp)
                             ) {
-                                val monthsList = listOf(
-                                    past90Start.plusMonths(0),
-                                    past90Start.plusMonths(1),
-                                    past90Start.plusMonths(2)
-                                )
-                                monthsList.forEach { m ->
-                                    Surface(
-                                        shape = RoundedCornerShape(6.dp),
-                                        color = if (m.monthValue == currentMonthNumber) PrimaryContainer.copy(alpha = 0.4f) else SurfaceContainer,
-                                        modifier = Modifier.weight(1f)
-                                    ) {
-                                        Text(
-                                            text = m.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
-                                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
-                                            color = if (m.monthValue == currentMonthNumber) Primary else OnSurfaceVariant,
-                                            modifier = Modifier.padding(vertical = 4.dp),
-                                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                                        )
+                                listOf("M", "T", "W", "T", "F", "S", "S").forEachIndexed { i, d ->
+                                    Box(modifier = Modifier.size(12.dp), contentAlignment = Alignment.Center) {
+                                        if (i % 2 == 0) {
+                                            Text(
+                                                text = d,
+                                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
+                                                color = OnSurfaceVariant.copy(alpha = 0.6f)
+                                            )
+                                        }
                                     }
                                 }
+                            }
+
+                            // Horizontally scrollable week columns
+                            val weeksList90 = uiState.heatmapDaysData.chunked(7)
+                            val ninetyScrollState = rememberScrollState()
+                            Row(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .horizontalScroll(ninetyScrollState),
+                                horizontalArrangement = Arrangement.spacedBy(3.dp)
+                            ) {
+                                weeksList90.forEachIndexed { weekIdx, weekDays ->
+                                    val firstDay = weekDays.firstOrNull()
+                                    val hasFirstDayOfMonth = weekDays.any { it.dayOfMonth in 1..7 }
+                                    val isNewMonth = (weekIdx == 0) || hasFirstDayOfMonth
+                                    val monthHeader = if (isNewMonth) {
+                                        weekDays.firstOrNull { it.dayOfMonth in 1..7 }?.monthName ?: firstDay?.monthName ?: ""
+                                    } else ""
+
+                                    Column(
+                                        modifier = Modifier.width(13.dp),
+                                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                                    ) {
+                                        // Month label above the week column
+                                        Box(modifier = Modifier.height(16.dp), contentAlignment = Alignment.CenterStart) {
+                                            if (monthHeader.isNotEmpty()) {
+                                                Text(
+                                                    text = monthHeader,
+                                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Primary,
+                                                    maxLines = 1,
+                                                    softWrap = false
+                                                )
+                                            }
+                                        }
+
+                                        // 7 day cells in this week column
+                                        weekDays.forEach { day ->
+                                            val cellColor = when {
+                                                day.isFuture -> SurfaceContainerHighest.copy(alpha = 0.2f)
+                                                day.level == 3 -> Tertiary
+                                                day.level == 2 -> TertiaryContainer
+                                                day.level == 1 -> Tertiary.copy(alpha = 0.45f)
+                                                else -> SurfaceContainerHighest
+                                            }
+
+                                            Box(
+                                                modifier = Modifier
+                                                    .size(12.dp)
+                                                    .clip(RoundedCornerShape(2.5.dp))
+                                                    .background(cellColor)
+                                                    .then(
+                                                        if (day.isToday) Modifier.border(1.dp, Primary, RoundedCornerShape(2.5.dp))
+                                                        else Modifier
+                                                    )
+                                                    .clickable {
+                                                        selectedDayDetail = day
+                                                    }
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // Legend
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = if (selectedHabit != null) "Not Done" else "0 done",
+                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+                                color = OnSurfaceVariant
+                            )
+                            Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
+                                if (selectedHabit != null) {
+                                    Box(Modifier.size(12.dp).clip(RoundedCornerShape(2.dp)).background(SurfaceContainerHighest))
+                                    Box(Modifier.size(12.dp).clip(RoundedCornerShape(2.dp)).background(Tertiary))
+                                } else {
+                                    listOf(SurfaceContainerHighest, Tertiary.copy(alpha = 0.4f), TertiaryContainer, Tertiary).forEach { c ->
+                                        Box(Modifier.size(12.dp).clip(RoundedCornerShape(2.dp)).background(c))
+                                    }
+                                }
+                            }
+                            Text(
+                                text = if (selectedHabit != null) "Completed" else "3+ done",
+                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+                                color = OnSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            } else {
+                // === MONTH VIEW CALENDAR HEATMAP ===
+                Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainerLowest) {
+                    Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "$monthName Consistency",
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = OnSurface
+                            )
+                            Surface(shape = RoundedCornerShape(50), color = TertiaryContainer.copy(alpha = 0.3f)) {
+                                Text("${uiState.monthlyRate} Rate", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = Tertiary, modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp))
                             }
                         }
 
@@ -811,7 +942,7 @@ private fun HeatmapSection(
                                 weekDays.forEach { day ->
                                     val cellColor = when {
                                         day.isFuture -> SurfaceContainerHighest.copy(alpha = 0.25f)
-                                        !day.isCurrentMonth && uiState.selectedHeatmapTab == 0 -> SurfaceContainerLowest.copy(alpha = 0.4f)
+                                        !day.isCurrentMonth -> SurfaceContainerLowest.copy(alpha = 0.4f)
                                         day.level == 3 -> Tertiary
                                         day.level == 2 -> TertiaryContainer
                                         day.level == 1 -> Tertiary.copy(alpha = 0.4f)
@@ -820,7 +951,7 @@ private fun HeatmapSection(
 
                                     val textColor = when {
                                         day.isFuture -> OnSurfaceVariant.copy(alpha = 0.25f)
-                                        !day.isCurrentMonth && uiState.selectedHeatmapTab == 0 -> OnSurfaceVariant.copy(alpha = 0.25f)
+                                        !day.isCurrentMonth -> OnSurfaceVariant.copy(alpha = 0.25f)
                                         day.level == 3 -> OnTertiary
                                         day.level == 2 -> OnTertiaryContainer
                                         day.level == 1 -> OnSurface

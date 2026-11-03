@@ -14,5 +14,6 @@ data class Todo(
     val dueTime: String = "", // e.g. "14:00" or "02:00 PM"
     val category: String = "General", // "Work", "Study", "Personal", "Health"
     val createdAt: Long = System.currentTimeMillis(),
-    val completedAt: Long? = null
+    val completedAt: Long? = null,
+    val dueDate: String = "" // e.g. "2026-11-03"
 )

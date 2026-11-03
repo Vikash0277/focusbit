@@ -61,12 +61,12 @@ fun TimerScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
-            .padding(bottom = 16.dp)
+            .padding(bottom = 110.dp)
             .padding(top = 16.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         // Circular Stopwatch with Start/Pause Button Inside the Circle
-        Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainerLow, shadowElevation = 8.dp) {
+        Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainerLow, shadowElevation = 8.dp) {
             Column(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp, horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -150,7 +150,7 @@ fun TimerScreen(
                         Triple("COMPLETED", "${completedMin / 60}h %02dm".format(completedMin % 60), Primary),
                         Triple("REMAINING", "${remMin}m %02ds".format(remSec), Tertiary)
                     ).forEach { (label, value, color) ->
-                        Surface(shape = RoundedCornerShape(8.dp), color = if (label == "COMPLETED") SurfaceContainerHigh else SurfaceContainer, modifier = Modifier.weight(1f)) {
+                        Surface(shape = RoundedCornerShape(14.dp), color = if (label == "COMPLETED") SurfaceContainerHigh else SurfaceContainer, modifier = Modifier.weight(1f)) {
                             Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                                 Text(label, style = MaterialTheme.typography.labelSmall, color = color, letterSpacing = 1.sp)
                                 Spacer(Modifier.height(2.dp))
@@ -166,7 +166,7 @@ fun TimerScreen(
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
 
             // === Pro Focus Presets ===
-            Surface(shape = RoundedCornerShape(14.dp), color = SurfaceContainerLow, shadowElevation = 2.dp) {
+            Surface(shape = RoundedCornerShape(20.dp), color = SurfaceContainerLow, shadowElevation = 2.dp) {
                 Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                         Text("Focus Presets", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant)
@@ -202,7 +202,7 @@ fun TimerScreen(
                                         )
                                     }
                                 },
-                                shape = RoundedCornerShape(10.dp),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = FilterChipDefaults.filterChipColors(
                                     selectedContainerColor = if (locked) Color(0xFF673AB7).copy(alpha = 0.1f) else PrimaryContainer,
                                     selectedLabelColor = if (locked) Color(0xFF673AB7) else OnPrimaryContainer
@@ -215,7 +215,7 @@ fun TimerScreen(
 
             // === Custom Time Setter ===
             Surface(
-                shape = RoundedCornerShape(14.dp),
+                shape = RoundedCornerShape(20.dp),
                 color = SurfaceContainerLow,
                 shadowElevation = 2.dp
             ) {
@@ -252,7 +252,7 @@ fun TimerScreen(
                             Text("HOURS", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant, letterSpacing = 1.sp)
                             FilledIconButton(
                                 onClick = { viewModel.adjustTargetMs(3600000L) },
-                                shape = RoundedCornerShape(10.dp),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = IconButtonDefaults.filledIconButtonColors(
                                     containerColor = SurfaceContainerHigh,
                                     contentColor = Primary
@@ -262,7 +262,7 @@ fun TimerScreen(
                                 Icon(Icons.Filled.KeyboardArrowUp, null, modifier = Modifier.size(24.dp))
                             }
                             Surface(
-                                shape = RoundedCornerShape(12.dp),
+                                shape = RoundedCornerShape(18.dp),
                                 color = PrimaryContainer.copy(alpha = 0.3f),
                                 modifier = Modifier.size(64.dp, 56.dp)
                             ) {
@@ -277,7 +277,7 @@ fun TimerScreen(
                             }
                             FilledIconButton(
                                 onClick = { viewModel.adjustTargetMs(-3600000L) },
-                                shape = RoundedCornerShape(10.dp),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = IconButtonDefaults.filledIconButtonColors(
                                     containerColor = SurfaceContainerHigh,
                                     contentColor = Tertiary
@@ -309,7 +309,7 @@ fun TimerScreen(
                             Text("MINS", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVariant, letterSpacing = 1.sp)
                             FilledIconButton(
                                 onClick = { viewModel.adjustTargetMs(60000L) },
-                                shape = RoundedCornerShape(10.dp),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = IconButtonDefaults.filledIconButtonColors(
                                     containerColor = SurfaceContainerHigh,
                                     contentColor = Primary
@@ -319,7 +319,7 @@ fun TimerScreen(
                                 Icon(Icons.Filled.KeyboardArrowUp, null, modifier = Modifier.size(24.dp))
                             }
                             Surface(
-                                shape = RoundedCornerShape(12.dp),
+                                shape = RoundedCornerShape(18.dp),
                                 color = PrimaryContainer.copy(alpha = 0.3f),
                                 modifier = Modifier.size(64.dp, 56.dp)
                             ) {
@@ -334,7 +334,7 @@ fun TimerScreen(
                             }
                             FilledIconButton(
                                 onClick = { viewModel.adjustTargetMs(-60000L) },
-                                shape = RoundedCornerShape(10.dp),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = IconButtonDefaults.filledIconButtonColors(
                                     containerColor = SurfaceContainerHigh,
                                     contentColor = Tertiary
@@ -363,7 +363,7 @@ fun TimerScreen(
                                         Text("${mins}m", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
                                     }
                                 },
-                                shape = RoundedCornerShape(8.dp),
+                                shape = RoundedCornerShape(14.dp),
                                 colors = FilterChipDefaults.filterChipColors(
                                     selectedContainerColor = if (locked) Color(0xFF673AB7).copy(alpha = 0.1f) else PrimaryContainer,
                                     selectedLabelColor = if (locked) Color(0xFF673AB7) else OnPrimaryContainer
@@ -379,7 +379,7 @@ fun TimerScreen(
                 OutlinedButton(
                     onClick = { viewModel.addLap() },
                     modifier = Modifier.weight(1f).height(48.dp),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(18.dp),
                     colors = ButtonDefaults.outlinedButtonColors(containerColor = SurfaceContainerHigh, contentColor = OnSurface)
                 ) {
                     Icon(Icons.AutoMirrored.Filled.List, null, tint = OnSurfaceVariant, modifier = Modifier.size(18.dp))
@@ -389,7 +389,7 @@ fun TimerScreen(
                 Button(
                     onClick = { viewModel.finishSession() },
                     modifier = Modifier.weight(1f).height(48.dp),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(18.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = TertiaryContainer, contentColor = OnTertiaryContainer)
                 ) {
                     Icon(Icons.Filled.CheckCircle, null, modifier = Modifier.size(18.dp))
@@ -421,7 +421,7 @@ fun TimerScreen(
                 Text("${uiState.laps.size} RECORDED", style = MaterialTheme.typography.labelSmall, color = Outline)
             }
             if (uiState.laps.isEmpty()) {
-                Surface(shape = RoundedCornerShape(12.dp), color = SurfaceContainer) {
+                Surface(shape = RoundedCornerShape(18.dp), color = SurfaceContainer) {
                     Box(modifier = Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
                         Text("No laps recorded yet. Tap 'Lap / Split' while timer runs.", style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariant)
                     }
@@ -439,7 +439,7 @@ fun TimerScreen(
 
 @Composable
 private fun LapCard(lap: LapDisplay, isLatest: Boolean) {
-    Surface(shape = RoundedCornerShape(8.dp), color = SurfaceContainer) {
+    Surface(shape = RoundedCornerShape(14.dp), color = SurfaceContainer) {
         Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
                 Surface(shape = CircleShape, color = if (isLatest) Primary.copy(alpha = 0.2f) else SurfaceContainerHighest, modifier = Modifier.size(32.dp)) {

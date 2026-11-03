@@ -202,7 +202,7 @@ fun ScrollCounterScreen(
                             }
                         },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(18.dp),
                         singleLine = true
                     )
 
@@ -229,7 +229,7 @@ fun ScrollCounterScreen(
                                 }
 
                                 Surface(
-                                    shape = RoundedCornerShape(12.dp),
+                                    shape = RoundedCornerShape(18.dp),
                                     color = if (isAlreadyAdded) SurfaceContainerHigh else SurfaceContainerLowest,
                                     border = BorderStroke(
                                         width = if (isAlreadyAdded) 1.2.dp else 0.5.dp,
@@ -263,11 +263,11 @@ fun ScrollCounterScreen(
                                                     contentDescription = null,
                                                     modifier = Modifier
                                                         .size(40.dp)
-                                                        .clip(RoundedCornerShape(8.dp))
+                                                        .clip(RoundedCornerShape(14.dp))
                                                 )
                                             } else {
                                                 Surface(
-                                                    shape = RoundedCornerShape(8.dp),
+                                                    shape = RoundedCornerShape(14.dp),
                                                     color = Color(0xFF673AB7).copy(alpha = 0.15f),
                                                     modifier = Modifier.size(40.dp)
                                                 ) {
@@ -332,7 +332,7 @@ fun ScrollCounterScreen(
                                                 onClick = {
                                                     ScrollTrackerManager.addAppAutoCloseConfig(app.packageName, app.appName, stats.autoCloseLimit)
                                                 },
-                                                shape = RoundedCornerShape(8.dp),
+                                                shape = RoundedCornerShape(14.dp),
                                                 colors = ButtonDefaults.filledTonalButtonColors(
                                                     containerColor = Color(0xFF673AB7).copy(alpha = 0.15f),
                                                     contentColor = Color(0xFF673AB7)
@@ -446,7 +446,7 @@ fun ScrollCounterScreen(
                             }
                         },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(18.dp),
                         singleLine = true
                     )
 
@@ -473,7 +473,7 @@ fun ScrollCounterScreen(
                                 }
 
                                 Surface(
-                                    shape = RoundedCornerShape(12.dp),
+                                    shape = RoundedCornerShape(18.dp),
                                     color = if (isAlreadyAdded) SurfaceContainerHigh else SurfaceContainerLowest,
                                     border = BorderStroke(
                                         width = if (isAlreadyAdded) 1.2.dp else 0.5.dp,
@@ -507,11 +507,11 @@ fun ScrollCounterScreen(
                                                     contentDescription = null,
                                                     modifier = Modifier
                                                         .size(40.dp)
-                                                        .clip(RoundedCornerShape(8.dp))
+                                                        .clip(RoundedCornerShape(14.dp))
                                                 )
                                             } else {
                                                 Surface(
-                                                    shape = RoundedCornerShape(8.dp),
+                                                    shape = RoundedCornerShape(14.dp),
                                                     color = Color(0xFF00B0FF).copy(alpha = 0.15f),
                                                     modifier = Modifier.size(40.dp)
                                                 ) {
@@ -576,7 +576,7 @@ fun ScrollCounterScreen(
                                                 onClick = {
                                                     ScrollTrackerManager.addCounterSpecificApp(app.packageName, app.appName)
                                                 },
-                                                shape = RoundedCornerShape(8.dp),
+                                                shape = RoundedCornerShape(14.dp),
                                                 colors = ButtonDefaults.filledTonalButtonColors(
                                                     containerColor = Color(0xFF00B0FF).copy(alpha = 0.15f),
                                                     contentColor = Color(0xFF00B0FF)
@@ -603,7 +603,7 @@ fun ScrollCounterScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 20.dp),
-        contentPadding = PaddingValues(top = 8.dp, bottom = 12.dp),
+        contentPadding = PaddingValues(top = 8.dp, bottom = 110.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
             // Header Row
@@ -632,7 +632,7 @@ fun ScrollCounterScreen(
             if (!isAccessibilityEnabled.value) {
                 item {
                     Surface(
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(24.dp),
                         color = Color(0xFFF57C00).copy(alpha = 0.12f),
                         border = BorderStroke(1.dp, Color(0xFFF57C00).copy(alpha = 0.4f)),
                         modifier = Modifier.fillMaxWidth()
@@ -652,7 +652,7 @@ fun ScrollCounterScreen(
                                         ShieldManager.openAccessibilitySettings(context)
                                     },
                                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF57C00), contentColor = Color.White),
-                                    shape = RoundedCornerShape(8.dp),
+                                    shape = RoundedCornerShape(14.dp),
                                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
                                 ) {
                                     Text("Enable in Settings", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
@@ -764,7 +764,7 @@ fun ScrollCounterScreen(
 
                         // Landmark Comparison Banner
                         Surface(
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(18.dp),
                             color = Color(0xFF673AB7).copy(alpha = 0.08f),
                             border = BorderStroke(0.8.dp, Color(0xFF673AB7).copy(alpha = 0.2f)),
                             modifier = Modifier.fillMaxWidth()
@@ -862,11 +862,11 @@ fun ScrollCounterScreen(
                                     val isSpecific = stats.isCounterSpecificAppsOnly
 
                                     Surface(
-                                        shape = RoundedCornerShape(10.dp),
+                                        shape = RoundedCornerShape(16.dp),
                                         color = if (!isSpecific) Primary else SurfaceContainerHighest,
                                         modifier = Modifier
                                             .weight(1f)
-                                            .clip(RoundedCornerShape(10.dp))
+                                            .clip(RoundedCornerShape(16.dp))
                                             .clickable { ScrollTrackerManager.setCounterSpecificAppsOnly(false) }
                                     ) {
                                         Row(
@@ -891,11 +891,11 @@ fun ScrollCounterScreen(
                                     }
 
                                     Surface(
-                                        shape = RoundedCornerShape(10.dp),
+                                        shape = RoundedCornerShape(16.dp),
                                         color = if (isSpecific) Primary else SurfaceContainerHighest,
                                         modifier = Modifier
                                             .weight(1f)
-                                            .clip(RoundedCornerShape(10.dp))
+                                            .clip(RoundedCornerShape(16.dp))
                                             .clickable { ScrollTrackerManager.setCounterSpecificAppsOnly(true) }
                                     ) {
                                         Row(
@@ -939,7 +939,7 @@ fun ScrollCounterScreen(
 
                                             FilledTonalButton(
                                                 onClick = { showCounterAppPickerModal = true },
-                                                shape = RoundedCornerShape(8.dp),
+                                                shape = RoundedCornerShape(14.dp),
                                                 colors = ButtonDefaults.filledTonalButtonColors(
                                                     containerColor = Color(0xFF00B0FF).copy(alpha = 0.15f),
                                                     contentColor = Color(0xFF00B0FF)
@@ -955,7 +955,7 @@ fun ScrollCounterScreen(
 
                                         if (stats.counterSpecificApps.isEmpty()) {
                                             Surface(
-                                                shape = RoundedCornerShape(12.dp),
+                                                shape = RoundedCornerShape(18.dp),
                                                 color = SurfaceContainerHighest,
                                                 border = BorderStroke(1.dp, OutlineVariant.copy(alpha = 0.3f)),
                                                 modifier = Modifier.fillMaxWidth()
@@ -987,7 +987,7 @@ fun ScrollCounterScreen(
                                                     Button(
                                                         onClick = { showCounterAppPickerModal = true },
                                                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00B0FF), contentColor = Color.White),
-                                                        shape = RoundedCornerShape(8.dp),
+                                                        shape = RoundedCornerShape(14.dp),
                                                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
                                                     ) {
                                                         Icon(Icons.Filled.Add, contentDescription = null, modifier = Modifier.size(14.dp))
@@ -1006,7 +1006,7 @@ fun ScrollCounterScreen(
                                                 }
 
                                                 Surface(
-                                                    shape = RoundedCornerShape(10.dp),
+                                                    shape = RoundedCornerShape(16.dp),
                                                     color = SurfaceContainerHighest,
                                                     border = BorderStroke(1.dp, Color(0xFF00B0FF).copy(alpha = 0.3f)),
                                                     modifier = Modifier.fillMaxWidth()
@@ -1029,11 +1029,11 @@ fun ScrollCounterScreen(
                                                                     contentDescription = null,
                                                                     modifier = Modifier
                                                                         .size(32.dp)
-                                                                        .clip(RoundedCornerShape(6.dp))
+                                                                        .clip(RoundedCornerShape(10.dp))
                                                                 )
                                                             } else {
                                                                 Surface(
-                                                                    shape = RoundedCornerShape(6.dp),
+                                                                    shape = RoundedCornerShape(10.dp),
                                                                     color = Color(0xFF00B0FF).copy(alpha = 0.15f),
                                                                     modifier = Modifier.size(32.dp)
                                                                 ) {
@@ -1086,7 +1086,7 @@ fun ScrollCounterScreen(
                                     }
                                 } else {
                                     Surface(
-                                        shape = RoundedCornerShape(10.dp),
+                                        shape = RoundedCornerShape(16.dp),
                                         color = Color(0xFF00B0FF).copy(alpha = 0.08f),
                                         border = BorderStroke(0.8.dp, Color(0xFF00B0FF).copy(alpha = 0.2f)),
                                         modifier = Modifier.fillMaxWidth()
@@ -1119,11 +1119,11 @@ fun ScrollCounterScreen(
                                     thresholds.forEach { count ->
                                         val isSelected = stats.warningThreshold == count
                                         Surface(
-                                            shape = RoundedCornerShape(10.dp),
+                                            shape = RoundedCornerShape(16.dp),
                                             color = if (isSelected) Primary else SurfaceContainerHighest,
                                             modifier = Modifier
                                                 .weight(1f)
-                                                .clip(RoundedCornerShape(10.dp))
+                                                .clip(RoundedCornerShape(16.dp))
                                                 .clickable { ScrollTrackerManager.setWarningThreshold(count) }
                                         ) {
                                             Box(
@@ -1164,11 +1164,11 @@ fun ScrollCounterScreen(
                                     durationOptions.forEach { (seconds, label) ->
                                         val isSelected = stats.displayDurationSeconds == seconds
                                         Surface(
-                                            shape = RoundedCornerShape(10.dp),
+                                            shape = RoundedCornerShape(16.dp),
                                             color = if (isSelected) Primary else SurfaceContainerHighest,
                                             modifier = Modifier
                                                 .weight(1f)
-                                                .clip(RoundedCornerShape(10.dp))
+                                                .clip(RoundedCornerShape(16.dp))
                                                 .clickable { ScrollTrackerManager.setOverlayDisplayDuration(seconds) }
                                         ) {
                                             Box(
@@ -1259,7 +1259,7 @@ fun ScrollCounterScreen(
                                             )
                                             FilledTonalButton(
                                                 onClick = { showAppPickerModal = true },
-                                                shape = RoundedCornerShape(8.dp),
+                                                shape = RoundedCornerShape(14.dp),
                                                 colors = ButtonDefaults.filledTonalButtonColors(
                                                     containerColor = Color(0xFF673AB7).copy(alpha = 0.15f),
                                                     contentColor = Color(0xFF673AB7)
@@ -1277,7 +1277,7 @@ fun ScrollCounterScreen(
 
                                         if (configuredApps.isEmpty()) {
                                             Surface(
-                                                shape = RoundedCornerShape(12.dp),
+                                                shape = RoundedCornerShape(18.dp),
                                                 color = SurfaceContainerHighest,
                                                 border = BorderStroke(1.dp, OutlineVariant.copy(alpha = 0.3f)),
                                                 modifier = Modifier.fillMaxWidth()
@@ -1303,7 +1303,7 @@ fun ScrollCounterScreen(
                                                     Button(
                                                         onClick = { showAppPickerModal = true },
                                                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
-                                                        shape = RoundedCornerShape(10.dp)
+                                                        shape = RoundedCornerShape(16.dp)
                                                     ) {
                                                         Icon(Icons.Filled.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                                                         Spacer(Modifier.width(6.dp))
@@ -1325,7 +1325,7 @@ fun ScrollCounterScreen(
                                                 }
 
                                                 Surface(
-                                                    shape = RoundedCornerShape(12.dp),
+                                                    shape = RoundedCornerShape(18.dp),
                                                     color = SurfaceContainerHighest,
                                                     border = BorderStroke(
                                                         width = if (isAppEnabled) 1.2.dp else 0.5.dp,
@@ -1350,11 +1350,11 @@ fun ScrollCounterScreen(
                                                                         contentDescription = null,
                                                                         modifier = Modifier
                                                                             .size(36.dp)
-                                                                            .clip(RoundedCornerShape(8.dp))
+                                                                            .clip(RoundedCornerShape(14.dp))
                                                                     )
                                                                 } else {
                                                                     Surface(
-                                                                        shape = RoundedCornerShape(8.dp),
+                                                                        shape = RoundedCornerShape(14.dp),
                                                                         color = Color(0xFF673AB7).copy(alpha = 0.15f),
                                                                         modifier = Modifier.size(36.dp)
                                                                     ) {
@@ -1424,11 +1424,11 @@ fun ScrollCounterScreen(
                                                                 limits.forEach { limit ->
                                                                     val isSelected = appLimit == limit
                                                                     Surface(
-                                                                        shape = RoundedCornerShape(8.dp),
+                                                                        shape = RoundedCornerShape(14.dp),
                                                                         color = if (isSelected) Color(0xFF673AB7) else Surface,
                                                                         modifier = Modifier
                                                                             .weight(1f)
-                                                                            .clip(RoundedCornerShape(8.dp))
+                                                                            .clip(RoundedCornerShape(14.dp))
                                                                             .clickable {
                                                                                 ScrollTrackerManager.setAppAutoCloseLimit(pkg, name, limit)
                                                                             }
@@ -1455,7 +1455,7 @@ fun ScrollCounterScreen(
                                             OutlinedButton(
                                                 onClick = { showAppPickerModal = true },
                                                 modifier = Modifier.fillMaxWidth(),
-                                                shape = RoundedCornerShape(10.dp),
+                                                shape = RoundedCornerShape(16.dp),
                                                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF673AB7)),
                                                 border = BorderStroke(1.dp, Color(0xFF673AB7).copy(alpha = 0.5f))
                                             ) {
@@ -1467,7 +1467,7 @@ fun ScrollCounterScreen(
                                     }
                                 } else if (!isPro) {
                                     Surface(
-                                        shape = RoundedCornerShape(12.dp),
+                                        shape = RoundedCornerShape(18.dp),
                                         color = Color(0xFF673AB7).copy(alpha = 0.08f),
                                         border = BorderStroke(1.dp, Color(0xFF673AB7).copy(alpha = 0.3f)),
                                         modifier = Modifier
@@ -1489,7 +1489,7 @@ fun ScrollCounterScreen(
                                             Button(
                                                 onClick = { showPaywall = true },
                                                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
-                                                shape = RoundedCornerShape(8.dp),
+                                                shape = RoundedCornerShape(14.dp),
                                                 contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
                                             ) {
                                                 Text("Unlock", fontSize = 12.sp, fontWeight = FontWeight.Bold)
@@ -1528,7 +1528,7 @@ fun ScrollCounterScreen(
             if (stats.appList.isEmpty()) {
                 item {
                     Surface(
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(24.dp),
                         color = SurfaceContainerHigh,
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -1579,7 +1579,7 @@ private fun AppScrollRow(
     }
 
     Surface(
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(20.dp),
         color = SurfaceContainerHigh,
         border = BorderStroke(1.dp, if (isOverThreshold) Color(0xFFD32F2F).copy(alpha = 0.4f) else OutlineVariant.copy(alpha = 0.2f)),
         modifier = Modifier.fillMaxWidth()
@@ -1602,7 +1602,7 @@ private fun AppScrollRow(
                         Image(
                             bitmap = appIcon.toBitmap().asImageBitmap(),
                             contentDescription = appInfo.appName,
-                            modifier = Modifier.size(40.dp).clip(RoundedCornerShape(10.dp))
+                            modifier = Modifier.size(40.dp).clip(RoundedCornerShape(16.dp))
                         )
                     } else {
                         Surface(shape = CircleShape, color = PrimaryContainer, modifier = Modifier.size(40.dp)) {

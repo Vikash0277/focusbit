@@ -65,7 +65,7 @@ fun PaywallModal(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Surface(
-                        shape = RoundedCornerShape(8.dp),
+                        shape = RoundedCornerShape(14.dp),
                         color = Color(0xFF673AB7).copy(alpha = 0.15f)
                     ) {
                         Text(
@@ -128,7 +128,7 @@ fun PaywallModal(
 
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(24.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
                     )
@@ -138,7 +138,7 @@ fun PaywallModal(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFF673AB7).copy(alpha = 0.12f), RoundedCornerShape(8.dp))
+                                .background(Color(0xFF673AB7).copy(alpha = 0.12f), RoundedCornerShape(14.dp))
                                 .padding(horizontal = 8.dp, vertical = 6.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -232,7 +232,7 @@ fun PaywallModal(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E9)),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(18.dp)
                     ) {
                         Row(
                             modifier = Modifier
@@ -262,7 +262,7 @@ fun PaywallModal(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(52.dp),
-                    shape = RoundedCornerShape(14.dp),
+                    shape = RoundedCornerShape(20.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF673AB7)
                     )
@@ -357,8 +357,8 @@ private fun PlanOptionCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .border(2.dp, borderColor, RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(2.dp, borderColor, RoundedCornerShape(24.dp)),
+        shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = containerColor)
     ) {
         Row(
@@ -378,7 +378,7 @@ private fun PlanOptionCard(
                     badge?.let {
                         Spacer(modifier = Modifier.width(8.dp))
                         Surface(
-                            shape = RoundedCornerShape(6.dp),
+                            shape = RoundedCornerShape(10.dp),
                             color = Color(0xFF673AB7)
                         ) {
                             Text(

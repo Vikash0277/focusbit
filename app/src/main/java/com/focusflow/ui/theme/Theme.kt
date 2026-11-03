@@ -1,97 +1,75 @@
 package com.focusflow.ui.theme
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.unit.dp
 
-val FocusFlowDarkColorScheme = darkColorScheme(
-    primary = DarkPrimary,
-    onPrimary = DarkOnPrimary,
-    primaryContainer = DarkPrimaryContainer,
-    onPrimaryContainer = DarkOnPrimaryContainer,
-    inversePrimary = DarkInversePrimary,
-    secondary = DarkSecondary,
-    onSecondary = DarkOnSecondary,
-    secondaryContainer = DarkSecondaryContainer,
-    onSecondaryContainer = DarkOnSecondaryContainer,
-    tertiary = DarkTertiary,
-    onTertiary = DarkOnTertiary,
-    tertiaryContainer = DarkTertiaryContainer,
-    onTertiaryContainer = DarkOnTertiaryContainer,
-    error = DarkError,
-    onError = DarkOnError,
-    errorContainer = DarkErrorContainer,
-    onErrorContainer = DarkOnErrorContainer,
-    background = DarkSurface,
-    onBackground = DarkOnSurface,
-    surface = DarkSurface,
-    onSurface = DarkOnSurface,
-    surfaceVariant = DarkSurfaceVariant,
-    onSurfaceVariant = DarkOnSurfaceVariant,
-    surfaceBright = DarkSurfaceBright,
-    surfaceDim = DarkSurfaceDim,
-    surfaceContainer = DarkSurfaceContainer,
-    surfaceContainerLow = DarkSurfaceContainerLow,
-    surfaceContainerLowest = DarkSurfaceContainerLowest,
-    surfaceContainerHigh = DarkSurfaceContainerHigh,
-    surfaceContainerHighest = DarkSurfaceContainerHighest,
-    outline = DarkOutline,
-    outlineVariant = DarkOutlineVariant,
-    inverseSurface = DarkInverseSurface,
-    inverseOnSurface = DarkInverseOnSurface,
-    surfaceTint = DarkPrimary,
-)
-
-val FocusFlowLightColorScheme = lightColorScheme(
-    primary = LightPrimary,
-    onPrimary = LightOnPrimary,
-    primaryContainer = LightPrimaryContainer,
-    onPrimaryContainer = LightOnPrimaryContainer,
-    inversePrimary = LightInversePrimary,
-    secondary = LightSecondary,
-    onSecondary = LightOnSecondary,
-    secondaryContainer = LightSecondaryContainer,
-    onSecondaryContainer = LightOnSecondaryContainer,
-    tertiary = LightTertiary,
-    onTertiary = LightOnTertiary,
-    tertiaryContainer = LightTertiaryContainer,
-    onTertiaryContainer = LightOnTertiaryContainer,
-    error = LightError,
-    onError = LightOnError,
-    errorContainer = LightErrorContainer,
-    onErrorContainer = LightOnErrorContainer,
-    background = LightSurface,
-    onBackground = LightOnSurface,
-    surface = LightSurface,
-    onSurface = LightOnSurface,
-    surfaceVariant = LightSurfaceVariant,
-    onSurfaceVariant = LightOnSurfaceVariant,
-    surfaceBright = LightSurfaceBright,
-    surfaceDim = LightSurfaceDim,
-    surfaceContainer = LightSurfaceContainer,
-    surfaceContainerLow = LightSurfaceContainerLow,
-    surfaceContainerLowest = LightSurfaceContainerLowest,
-    surfaceContainerHigh = LightSurfaceContainerHigh,
-    surfaceContainerHighest = LightSurfaceContainerHighest,
-    outline = LightOutline,
-    outlineVariant = LightOutlineVariant,
-    inverseSurface = LightInverseSurface,
-    inverseOnSurface = LightInverseOnSurface,
-    surfaceTint = LightPrimary,
+// M3 Expressive: Much larger, rounder corner radii across all shape categories
+val ExpressiveShapes = Shapes(
+    extraSmall = RoundedCornerShape(8.dp),
+    small = RoundedCornerShape(14.dp),
+    medium = RoundedCornerShape(20.dp),
+    large = RoundedCornerShape(28.dp),
+    extraLarge = RoundedCornerShape(32.dp),
 )
 
 @Composable
 fun FocusFlowTheme(
+    appTheme: AppTheme? = null,
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) FocusFlowDarkColorScheme else FocusFlowLightColorScheme
+    val activeThemeFromManager by ThemeManager.currentTheme.collectAsState()
+    val activeTheme = appTheme ?: activeThemeFromManager
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = FocusFlowTypography,
-        content = content
+    val targetColors = ThemeManager.getColorSchemeForTheme(activeTheme, isSystemInDarkTheme = darkTheme)
+
+    // Smooth color transitions between themes
+    val animatedBackground by animateColorAsState(targetColors.background, tween(300), label = "bg")
+    val animatedSurface by animateColorAsState(targetColors.surface, tween(300), label = "surface")
+    val animatedSecondarySurface by animateColorAsState(targetColors.secondarySurface, tween(300), label = "secSurface")
+    val animatedPrimary by animateColorAsState(targetColors.primary, tween(300), label = "primary")
+    val animatedPrimaryDark by animateColorAsState(targetColors.primaryDark, tween(300), label = "primaryDark")
+    val animatedSoftAccent by animateColorAsState(targetColors.softAccent, tween(300), label = "softAccent")
+    val animatedPrimaryText by animateColorAsState(targetColors.primaryText, tween(300), label = "primaryText")
+    val animatedSecondaryText by animateColorAsState(targetColors.secondaryText, tween(300), label = "secText")
+    val animatedBorder by animateColorAsState(targetColors.border, tween(300), label = "border")
+
+    val animatedColorScheme = AppColorScheme(
+        background = animatedBackground,
+        surface = animatedSurface,
+        secondarySurface = animatedSecondarySurface,
+        primary = animatedPrimary,
+        primaryDark = animatedPrimaryDark,
+        softAccent = animatedSoftAccent,
+        primaryText = animatedPrimaryText,
+        secondaryText = animatedSecondaryText,
+        border = animatedBorder,
+        isDark = targetColors.isDark,
+        primaryGradientStart = targetColors.primaryGradientStart,
+        primaryGradientEnd = targetColors.primaryGradientEnd,
+        secondaryGradientStart = targetColors.secondaryGradientStart,
+        secondaryGradientEnd = targetColors.secondaryGradientEnd
     )
+
+    val materialColorScheme = animatedColorScheme.toMaterialColorScheme()
+
+    CompositionLocalProvider(
+        LocalAppColors provides animatedColorScheme
+    ) {
+        MaterialTheme(
+            colorScheme = materialColorScheme,
+            typography = FocusFlowTypography,
+            shapes = ExpressiveShapes,
+            content = content
+        )
+    }
 }

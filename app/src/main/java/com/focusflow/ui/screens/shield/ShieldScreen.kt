@@ -329,7 +329,7 @@ fun ShieldScreen(
                             }
                         },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(18.dp),
                         singleLine = true
                     )
 
@@ -375,7 +375,7 @@ fun ShieldScreen(
 
                     // "Select All Apps" Row with Checkbox
                     Surface(
-                        shape = RoundedCornerShape(14.dp),
+                        shape = RoundedCornerShape(20.dp),
                         color = SurfaceContainerHigh,
                         border = BorderStroke(1.dp, Color(0xFF9C27B0).copy(alpha = 0.35f)),
                         modifier = Modifier
@@ -441,12 +441,12 @@ fun ShieldScreen(
 
                     // Shield Time Interval Selector Card
                     Surface(
-                        shape = RoundedCornerShape(14.dp),
+                        shape = RoundedCornerShape(20.dp),
                         color = SurfaceContainerHigh,
                         border = BorderStroke(1.dp, Primary.copy(alpha = 0.35f)),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(14.dp))
+                            .clip(RoundedCornerShape(20.dp))
                             .clickable { showTimeWindowPickerForShield = true }
                     ) {
                         Row(
@@ -491,7 +491,7 @@ fun ShieldScreen(
 
                             FilledTonalButton(
                                 onClick = { showTimeWindowPickerForShield = true },
-                                shape = RoundedCornerShape(8.dp),
+                                shape = RoundedCornerShape(14.dp),
                                 colors = ButtonDefaults.filledTonalButtonColors(
                                     containerColor = Primary.copy(alpha = 0.15f),
                                     contentColor = Primary
@@ -532,7 +532,7 @@ fun ShieldScreen(
                                     }
 
                                     Surface(
-                                        shape = RoundedCornerShape(12.dp),
+                                        shape = RoundedCornerShape(18.dp),
                                         color = when {
                                             isAlreadyAdded -> SurfaceContainerHigh
                                             isSelected -> Color(0xFF673AB7).copy(alpha = 0.12f)
@@ -569,7 +569,7 @@ fun ShieldScreen(
                                                     Image(
                                                         bitmap = iconBitmap,
                                                         contentDescription = appInfo.appName,
-                                                        modifier = Modifier.size(38.dp).clip(RoundedCornerShape(8.dp))
+                                                        modifier = Modifier.size(38.dp).clip(RoundedCornerShape(14.dp))
                                                     )
                                                 } else {
                                                     Surface(shape = CircleShape, color = PrimaryContainer, modifier = Modifier.size(38.dp)) {
@@ -632,7 +632,7 @@ fun ShieldScreen(
                                                                 selectedAppToShield = appInfo
                                                             }
                                                         },
-                                                        shape = RoundedCornerShape(8.dp),
+                                                        shape = RoundedCornerShape(14.dp),
                                                         colors = ButtonDefaults.filledTonalButtonColors(
                                                             containerColor = Color(0xFF673AB7).copy(alpha = 0.15f),
                                                             contentColor = Color(0xFFD1C4E9)
@@ -672,7 +672,7 @@ fun ShieldScreen(
                     if (selectedPackageNames.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
                         Surface(
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(24.dp),
                             color = SurfaceContainerHigh,
                             border = BorderStroke(1.dp, Color(0xFF673AB7).copy(alpha = 0.35f)),
                             shadowElevation = 8.dp,
@@ -736,7 +736,7 @@ fun ShieldScreen(
                                         containerColor = Color(0xFF673AB7),
                                         contentColor = Color.White
                                     ),
-                                    shape = RoundedCornerShape(12.dp),
+                                    shape = RoundedCornerShape(18.dp),
                                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
                                 ) {
                                     Icon(Icons.Filled.Shield, null, modifier = Modifier.size(16.dp))
@@ -760,13 +760,13 @@ fun ShieldScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
-            .padding(top = 16.dp, bottom = 24.dp),
+            .padding(top = 16.dp, bottom = 110.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // Accessibility Permission Banner (shown only if not granted)
         if (!uiState.isAccessibilityEnabled) {
             Surface(
-                shape = RoundedCornerShape(14.dp),
+                shape = RoundedCornerShape(20.dp),
                 color = SurfaceContainerHighest,
                 border = ButtonDefaults.outlinedButtonBorder(enabled = true)
             ) {
@@ -798,7 +798,7 @@ fun ShieldScreen(
                         Button(
                             onClick = { viewModel.openAccessibilitySettings() },
                             colors = ButtonDefaults.buttonColors(containerColor = Secondary, contentColor = OnSecondary),
-                            shape = RoundedCornerShape(8.dp),
+                            shape = RoundedCornerShape(14.dp),
                             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
                         ) {
                             Text("Enable in Settings", style = MaterialTheme.typography.labelMedium)
@@ -810,7 +810,7 @@ fun ShieldScreen(
 
         // Phone Screen Time & App Usage Card
         Surface(
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(24.dp),
             color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
             modifier = Modifier
                 .fillMaxWidth()
@@ -901,7 +901,7 @@ fun ShieldScreen(
 
         // App-Wise Protected Apps List
         if (uiState.blockedApps.isEmpty()) {
-            Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainer) {
+            Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainer) {
                 Column(
                     modifier = Modifier.fillMaxWidth().padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -929,7 +929,7 @@ fun ShieldScreen(
                 }
             }
         } else {
-            Surface(shape = RoundedCornerShape(16.dp), color = SurfaceContainer) {
+            Surface(shape = RoundedCornerShape(24.dp), color = SurfaceContainer) {
                 Column {
                     uiState.blockedApps.forEachIndexed { index, app ->
                         StrictAppRow(
@@ -1010,7 +1010,7 @@ private fun StrictAppRow(
                 Image(
                     bitmap = appIcon,
                     contentDescription = app.appName,
-                    modifier = Modifier.size(38.dp).clip(RoundedCornerShape(8.dp))
+                    modifier = Modifier.size(38.dp).clip(RoundedCornerShape(14.dp))
                 )
             } else {
                 Surface(shape = CircleShape, color = Primary.copy(alpha = 0.15f), modifier = Modifier.size(38.dp)) {
@@ -1091,11 +1091,11 @@ private fun StrictAppRow(
 
         // Bottom row: Window chip (tap to pick focus window; blocked during strict lock)
         Surface(
-            shape = RoundedCornerShape(8.dp),
+            shape = RoundedCornerShape(14.dp),
             color = if (isStrictActive) TertiaryContainer.copy(alpha = 0.15f) else SurfaceContainerHighest,
             border = ButtonDefaults.outlinedButtonBorder(enabled = true),
             modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
+                .clip(RoundedCornerShape(14.dp))
                 .clickable { onOpenWindowPicker() }
         ) {
             Row(
@@ -1253,7 +1253,7 @@ private fun TimeWindowPickerDialog(
                         editingTime = null
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Primary, contentColor = OnPrimary),
-                    shape = RoundedCornerShape(10.dp)
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Text("Confirm", fontWeight = FontWeight.Bold)
                 }
@@ -1280,7 +1280,7 @@ private fun TimeWindowPickerDialog(
             ) {
                 // Time Range Summary Pill with Duration
                 Surface(
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(18.dp),
                     color = Primary.copy(alpha = 0.1f),
                     border = BorderStroke(1.dp, Primary.copy(alpha = 0.25f)),
                     modifier = Modifier.fillMaxWidth()
@@ -1360,12 +1360,12 @@ private fun TimeWindowPickerDialog(
                 ) {
                     // Start Time Button
                     Surface(
-                        shape = RoundedCornerShape(14.dp),
+                        shape = RoundedCornerShape(20.dp),
                         color = SurfaceContainerHigh,
                         border = BorderStroke(1.dp, OutlineVariant.copy(alpha = 0.35f)),
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(14.dp))
+                            .clip(RoundedCornerShape(20.dp))
                             .clickable { editingTime = "start" }
                     ) {
                         Column(
@@ -1391,12 +1391,12 @@ private fun TimeWindowPickerDialog(
 
                     // End Time Button
                     Surface(
-                        shape = RoundedCornerShape(14.dp),
+                        shape = RoundedCornerShape(20.dp),
                         color = SurfaceContainerHigh,
                         border = BorderStroke(1.dp, OutlineVariant.copy(alpha = 0.35f)),
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(14.dp))
+                            .clip(RoundedCornerShape(20.dp))
                             .clickable { editingTime = "end" }
                     ) {
                         Column(
@@ -1426,7 +1426,7 @@ private fun TimeWindowPickerDialog(
             Button(
                 onClick = { onSave(selectedStart, selectedEnd) },
                 colors = ButtonDefaults.buttonColors(containerColor = Primary, contentColor = OnPrimary),
-                shape = RoundedCornerShape(10.dp)
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Text(confirmButtonText, fontWeight = FontWeight.Bold)
             }
@@ -1445,7 +1445,7 @@ fun PremiumBadge(
     modifier: Modifier = Modifier
 ) {
     Surface(
-        shape = RoundedCornerShape(4.dp),
+        shape = RoundedCornerShape(8.dp),
         color = Color(0xFF673AB7).copy(alpha = 0.22f),
         border = BorderStroke(0.8.dp, Color(0xFF9C27B0).copy(alpha = 0.5f)),
         modifier = modifier

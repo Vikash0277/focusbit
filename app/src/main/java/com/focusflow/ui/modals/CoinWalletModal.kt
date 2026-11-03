@@ -135,7 +135,7 @@ fun CoinWalletModal(
                         }
 
                         Spacer(modifier = Modifier.height(12.dp))
-                        Divider(color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.1f))
+                        HorizontalDivider(color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.1f))
                         Spacer(modifier = Modifier.height(10.dp))
 
                         Row(
@@ -179,7 +179,7 @@ fun CoinWalletModal(
                 purchaseSuccessMessage?.let { msg ->
                     Spacer(modifier = Modifier.height(10.dp))
                     Surface(
-                        shape = RoundedCornerShape(10.dp),
+                        shape = RoundedCornerShape(16.dp),
                         color = Color(0xFFE8F5E9),
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -335,7 +335,7 @@ fun CoinWalletModal(
                             item {
                                 Card(
                                     modifier = Modifier.fillMaxWidth(),
-                                    shape = RoundedCornerShape(16.dp),
+                                    shape = RoundedCornerShape(24.dp),
                                     colors = CardDefaults.cardColors(
                                         containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
                                     )
@@ -383,9 +383,9 @@ private fun CoinPackCard(
             .border(
                 width = if (isHighlighted) 2.dp else 1.dp,
                 color = borderColor,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(24.dp)
             ),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = containerColor)
     ) {
         Row(
@@ -440,7 +440,7 @@ private fun CoinPackCard(
 
             Button(
                 onClick = onPurchase,
-                shape = RoundedCornerShape(10.dp),
+                shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (isHighlighted) Color(0xFFFFB300) else MaterialTheme.colorScheme.primary,
                     contentColor = if (isHighlighted) Color.Black else MaterialTheme.colorScheme.onPrimary
@@ -486,7 +486,7 @@ private fun TransactionRow(tx: CoinTransaction) {
 
     Surface(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(18.dp),
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
     ) {
         Row(

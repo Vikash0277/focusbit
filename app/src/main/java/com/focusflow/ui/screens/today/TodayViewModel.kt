@@ -7,6 +7,7 @@ import com.focusflow.coins.CoinLedgerService
 import com.focusflow.data.db.FocusFlowDatabase
 import com.focusflow.data.db.entity.Commitment
 import com.focusflow.data.db.entity.Goal
+import com.focusflow.data.db.entity.Note
 import com.focusflow.data.db.entity.Todo
 import com.focusflow.subscription.SubscriptionManager
 import kotlinx.coroutines.flow.*
@@ -22,13 +23,40 @@ data class TodayUiState(
     val goal: Goal? = null,
     val commitments: List<Commitment> = emptyList(),
     val todos: List<Todo> = emptyList(),
-    val selectedView: Int = 0, // 0: Daily Todos, 1: Goals & Schedule
+    val notes: List<Note> = emptyList(),
+    val selectedView: Int = 0, // 0: Home / Overview, 1: Daily Notes, 2: My Calendar
+    val selectedFilterTag: String = "All",
+    val selectedCalendarDate: String = "",
     val todayLoggedMinutes: Int = 0,
     val todayPlannedMinutes: Int = 0,
     val showToast: Boolean = false,
     val toastMessage: String = "",
     val showPaywall: Boolean = false
-)
+) {
+    val filteredTodos: List<Todo>
+        get() {
+            if (selectedCalendarDate.isBlank()) return todos
+            return todos.filter { todo ->
+                if (todo.dueDate.isNotBlank()) {
+                    todo.dueDate == selectedCalendarDate
+                } else {
+                    val createdDate = java.time.Instant.ofEpochMilli(todo.createdAt)
+                        .atZone(java.time.ZoneId.systemDefault())
+                        .toLocalDate().toString()
+                    createdDate == selectedCalendarDate
+                }
+            }
+        }
+
+    val progressPercent: Int
+        get() {
+            val list = if (filteredTodos.isNotEmpty()) filteredTodos else todos
+            val total = list.size
+            if (total == 0) return 80
+            val completed = list.count { it.isCompleted }
+            return ((completed.toFloat() / total.toFloat()) * 100).toInt().coerceIn(15, 100)
+        }
+}
 
 class TodayViewModel(private val database: FocusFlowDatabase) : ViewModel() {
 
@@ -52,7 +80,8 @@ class TodayViewModel(private val database: FocusFlowDatabase) : ViewModel() {
             else -> "Good evening"
         }
 
-        _uiState.update { it.copy(greeting = greeting, dateLabel = dateLabel) }
+        val selectedDate = LocalDate.now().toString()
+        _uiState.update { it.copy(greeting = greeting, dateLabel = dateLabel, selectedCalendarDate = selectedDate) }
 
         viewModelScope.launch {
             database.goalDao().getAllGoals().collect { goals ->
@@ -72,19 +101,178 @@ class TodayViewModel(private val database: FocusFlowDatabase) : ViewModel() {
         viewModelScope.launch {
             val today = LocalDate.now().toString()
             database.commitmentDao().getCommitmentsForDate(today).collect { commitments ->
-                _uiState.update { it.copy(commitments = commitments) }
+                if (commitments.isEmpty()) {
+                    // Seed initial sample schedule items matching calendar design
+                    database.commitmentDao().insertCommitment(
+                        Commitment(
+                            title = "60min Push-up & Stretching Exercise..",
+                            startTime = "08:30 AM",
+                            endTime = "09:30 AM",
+                            duration = "60m",
+                            label = "Health",
+                            date = today,
+                            status = "completed"
+                        )
+                    )
+                    database.commitmentDao().insertCommitment(
+                        Commitment(
+                            title = "Schedule Client Meeting..",
+                            startTime = "11:31 AM",
+                            endTime = "01:00 PM",
+                            duration = "90m",
+                            label = "Work",
+                            date = today,
+                            status = "active"
+                        )
+                    )
+                    database.commitmentDao().insertCommitment(
+                        Commitment(
+                            title = "Share Concepts with Dev..",
+                            startTime = "02:30 PM",
+                            endTime = "04:30 PM",
+                            duration = "120m",
+                            label = "Design",
+                            date = today,
+                            status = "upcoming"
+                        )
+                    )
+                } else {
+                    _uiState.update { it.copy(commitments = commitments) }
+                }
             }
         }
 
         viewModelScope.launch {
             database.todoDao().getAllTodos().collect { todos ->
-                _uiState.update { it.copy(todos = todos) }
+                if (todos.isEmpty()) {
+                    val todayStr = LocalDate.now().toString()
+                    database.todoDao().insertTodo(
+                        Todo(
+                            title = "Complete Profile & Workspace Setup",
+                            priority = "HIGH",
+                            dueTime = "12:00 PM",
+                            category = "Work",
+                            dueDate = todayStr
+                        )
+                    )
+                    database.todoDao().insertTodo(
+                        Todo(
+                            title = "Sketch One UIScreen for FocusFlow",
+                            priority = "MEDIUM",
+                            dueTime = "04:00 PM",
+                            category = "Design",
+                            dueDate = todayStr
+                        )
+                    )
+                } else {
+                    _uiState.update { it.copy(todos = todos) }
+                }
+            }
+        }
+
+        viewModelScope.launch {
+            database.noteDao().getAllNotes().collect { notes ->
+                if (notes.isEmpty()) {
+                    val sampleDate = java.text.SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(java.util.Date())
+                    database.noteDao().insertNote(
+                        Note(
+                            title = "Sketch One UIScreen..",
+                            content = "Four app project unfinished. Wireframe the dashboard, notes list and schedule timeline matching the modern lavender aesthetic.",
+                            emoji = "✨",
+                            category = "High Priority",
+                            colorTag = "#EC4899",
+                            date = sampleDate
+                        )
+                    )
+                    database.noteDao().insertNote(
+                        Note(
+                            title = "Review yesterday's designs..",
+                            content = "There are many questions about color contrast, micro-interactions, and dark mode palette harmony across screens.",
+                            emoji = "🧠",
+                            category = "Productive",
+                            colorTag = "#8B5CF6",
+                            date = sampleDate
+                        )
+                    )
+                    database.noteDao().insertNote(
+                        Note(
+                            title = "Read 10 mins design article..",
+                            content = "Focus on intuitive spacing, cognitive fluency, and glanceable calendar timeline widgets.",
+                            emoji = "📚",
+                            category = "Ideas",
+                            colorTag = "#F59E0B",
+                            date = sampleDate
+                        )
+                    )
+                } else {
+                    _uiState.update { it.copy(notes = notes) }
+                }
             }
         }
     }
 
     fun setSelectedView(viewIndex: Int) {
         _uiState.update { it.copy(selectedView = viewIndex) }
+    }
+
+    fun setSelectedCategory(cat: String) {
+        _uiState.update { it.copy(selectedFilterTag = cat) }
+    }
+
+    fun setSelectedCalendarDate(date: String) {
+        _uiState.update { it.copy(selectedCalendarDate = date) }
+        viewModelScope.launch {
+            database.commitmentDao().getCommitmentsForDate(date).collect { commitments ->
+                _uiState.update { it.copy(commitments = commitments) }
+            }
+        }
+    }
+
+    fun addNote(title: String, content: String, emoji: String, category: String, colorTag: String) {
+        if (title.isBlank()) return
+        val dateFormatted = java.text.SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(java.util.Date())
+        viewModelScope.launch {
+            database.noteDao().insertNote(
+                Note(
+                    title = title.trim(),
+                    content = content.trim(),
+                    emoji = emoji.ifBlank { "📝" },
+                    category = category.trim().ifBlank { "Productive" },
+                    colorTag = colorTag.ifBlank { "#8B5CF6" },
+                    date = dateFormatted
+                )
+            )
+            CoinLedgerService.earn(
+                CoinLedgerService.REWARD_TODO_COMPLETED,
+                "Created Note: $title",
+                "note_created_${System.currentTimeMillis()}"
+            )
+            _uiState.update {
+                it.copy(
+                    showToast = true,
+                    toastMessage = "✨ Note added & +${CoinLedgerService.REWARD_TODO_COMPLETED} 🪙 earned!"
+                )
+            }
+            kotlinx.coroutines.delay(2000)
+            _uiState.update { it.copy(showToast = false) }
+        }
+    }
+
+    fun updateNote(note: Note) {
+        viewModelScope.launch {
+            database.noteDao().updateNote(note)
+        }
+    }
+
+    fun deleteNote(note: Note) {
+        viewModelScope.launch {
+            database.noteDao().deleteNote(note)
+            _uiState.update {
+                it.copy(showToast = true, toastMessage = "🗑️ Note deleted")
+            }
+            kotlinx.coroutines.delay(1800)
+            _uiState.update { it.copy(showToast = false) }
+        }
     }
 
     fun logDailyTarget() {
@@ -242,7 +430,7 @@ class TodayViewModel(private val database: FocusFlowDatabase) : ViewModel() {
         }
     }
 
-    fun addTodo(title: String, priority: String, dueTime: String, category: String) {
+    fun addTodo(title: String, priority: String, dueTime: String, category: String, dueDate: String = "") {
         if (title.isBlank()) return
         viewModelScope.launch {
             val currentTodos = _uiState.value.todos.size
@@ -250,12 +438,14 @@ class TodayViewModel(private val database: FocusFlowDatabase) : ViewModel() {
                 _uiState.update { it.copy(showPaywall = true) }
                 return@launch
             }
+            val date = dueDate.ifBlank { _uiState.value.selectedCalendarDate.ifBlank { LocalDate.now().toString() } }
             database.todoDao().insertTodo(
                 Todo(
                     title = title.trim(),
                     priority = priority,
                     dueTime = dueTime.trim(),
-                    category = category.trim().ifBlank { "General" }
+                    category = category.trim().ifBlank { "General" },
+                    dueDate = date
                 )
             )
         }

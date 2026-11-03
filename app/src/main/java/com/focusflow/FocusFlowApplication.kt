@@ -10,6 +10,7 @@ class FocusFlowApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        com.focusflow.ui.theme.ThemeManager.init(this)
         com.focusflow.notifications.NotificationHelper.createNotificationChannels(this)
         com.focusflow.coins.CoinLedgerService.init(database)
         com.focusflow.subscription.SubscriptionManager.init(this)
