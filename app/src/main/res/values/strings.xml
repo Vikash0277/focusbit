@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FocusBit</string>
+    <string name="app_tagline">Small Focus. Big Progress.</string>
+    <string name="accessibility_service_description">FocusBit Shield monitors foreground applications during your active focus sessions to protect your focus and build meaningful momentum.</string>
+</resources>
