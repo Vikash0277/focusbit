@@ -307,55 +307,7 @@ fun TodayScreen(
 
             // Dynamic Content based on selected tab
             if (uiState.selectedView == 0) {
-                // VIEW 1: GOALS & SCHEDULE
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Focus Pacing",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    FilledTonalButton(
-                        onClick = { showGoalDialog = true },
-                        shape = CircleShape,
-                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
-                    ) {
-                        Icon(Icons.Filled.Add, null, modifier = Modifier.size(16.dp))
-                        Spacer(Modifier.width(4.dp))
-                        Text("New Goal", style = MaterialTheme.typography.labelMedium)
-                    }
-                }
-
-                // Today's Target Summary
-                FocusSummaryCard(uiState)
-
-                // Active Goal Card or Empty State
-                val currentGoal = uiState.goal
-                if (currentGoal != null) {
-                    ActiveGoalCard(
-                        goal = currentGoal,
-                        onLogTarget = { viewModel.logDailyTarget() },
-                        onUpdateReminder = { enabled, time ->
-                            viewModel.updateGoalReminder(context, currentGoal.id, enabled, time)
-                        },
-                        onTestReminder = {
-                            viewModel.testGoalReminder(context, currentGoal)
-                        }
-                    )
-                } else {
-                    NoGoalCard(onAddGoal = { showGoalDialog = true })
-                }
-
-                // Today's Commitments & Time Horizon (only show if they have values)
-                if (uiState.commitments.isNotEmpty()) {
-                    CommitmentsSection(uiState.commitments)
-                    TimeCanvasSection(uiState.commitments)
-                }
-            } else {
-                // VIEW 2: DAILY TODOS
+                // VIEW 0: DAILY TODOS
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -435,6 +387,54 @@ fun TodayScreen(
                         }
                     }
                 }
+            } else {
+                // VIEW 1: GOALS & SCHEDULE
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Focus Pacing",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                    FilledTonalButton(
+                        onClick = { showGoalDialog = true },
+                        shape = CircleShape,
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                    ) {
+                        Icon(Icons.Filled.Add, null, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text("New Goal", style = MaterialTheme.typography.labelMedium)
+                    }
+                }
+
+                // Today's Target Summary
+                FocusSummaryCard(uiState)
+
+                // Active Goal Card or Empty State
+                val currentGoal = uiState.goal
+                if (currentGoal != null) {
+                    ActiveGoalCard(
+                        goal = currentGoal,
+                        onLogTarget = { viewModel.logDailyTarget() },
+                        onUpdateReminder = { enabled, time ->
+                            viewModel.updateGoalReminder(context, currentGoal.id, enabled, time)
+                        },
+                        onTestReminder = {
+                            viewModel.testGoalReminder(context, currentGoal)
+                        }
+                    )
+                } else {
+                    NoGoalCard(onAddGoal = { showGoalDialog = true })
+                }
+
+                // Today's Commitments & Time Horizon (only show if they have values)
+                if (uiState.commitments.isNotEmpty()) {
+                    CommitmentsSection(uiState.commitments)
+                    TimeCanvasSection(uiState.commitments)
+                }
             }
         }
 
@@ -489,7 +489,7 @@ private fun SegmentedViewTabs(
                 .padding(4.dp),
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            // Tab 0: Goals & Schedule
+            // Tab 0: Daily Todos
             val tab0Selected = selectedView == 0
             Surface(
                 modifier = Modifier
@@ -506,22 +506,39 @@ private fun SegmentedViewTabs(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        Icons.Filled.CalendarMonth,
+                        Icons.Filled.Checklist,
                         contentDescription = null,
                         modifier = Modifier.size(16.dp),
                         tint = if (tab0Selected) OnPrimaryContainer else OnSurfaceVariant
                     )
                     Spacer(Modifier.width(6.dp))
                     Text(
-                        text = "Goals & Schedule",
+                        text = "Daily Todos",
                         style = MaterialTheme.typography.labelMedium,
                         fontWeight = if (tab0Selected) FontWeight.Bold else FontWeight.Medium,
                         color = if (tab0Selected) OnPrimaryContainer else OnSurfaceVariant
                     )
+                    if (todoCount > 0) {
+                        Spacer(Modifier.width(6.dp))
+                        Surface(
+                            shape = CircleShape,
+                            color = if (tab0Selected) Primary else Tertiary,
+                            modifier = Modifier.size(18.dp)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Text(
+                                    text = "$todoCount",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (tab0Selected) OnPrimary else OnTertiary
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
-            // Tab 1: Daily Todos
+            // Tab 1: Goals & Schedule
             val tab1Selected = selectedView == 1
             Surface(
                 modifier = Modifier
@@ -538,35 +555,18 @@ private fun SegmentedViewTabs(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        Icons.Filled.Checklist,
+                        Icons.Filled.CalendarMonth,
                         contentDescription = null,
                         modifier = Modifier.size(16.dp),
                         tint = if (tab1Selected) OnPrimaryContainer else OnSurfaceVariant
                     )
                     Spacer(Modifier.width(6.dp))
                     Text(
-                        text = "Daily Todos",
+                        text = "Goals & Schedule",
                         style = MaterialTheme.typography.labelMedium,
                         fontWeight = if (tab1Selected) FontWeight.Bold else FontWeight.Medium,
                         color = if (tab1Selected) OnPrimaryContainer else OnSurfaceVariant
                     )
-                    if (todoCount > 0) {
-                        Spacer(Modifier.width(6.dp))
-                        Surface(
-                            shape = CircleShape,
-                            color = if (tab1Selected) Primary else Tertiary,
-                            modifier = Modifier.size(18.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Text(
-                                    text = "$todoCount",
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (tab1Selected) OnPrimary else OnTertiary
-                                )
-                            }
-                        }
-                    }
                 }
             }
         }

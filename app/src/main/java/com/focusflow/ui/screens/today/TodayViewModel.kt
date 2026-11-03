@@ -22,7 +22,7 @@ data class TodayUiState(
     val goal: Goal? = null,
     val commitments: List<Commitment> = emptyList(),
     val todos: List<Todo> = emptyList(),
-    val selectedView: Int = 0, // 0: Goals & Schedule, 1: Daily Todos
+    val selectedView: Int = 0, // 0: Daily Todos, 1: Goals & Schedule
     val todayLoggedMinutes: Int = 0,
     val todayPlannedMinutes: Int = 0,
     val showToast: Boolean = false,
